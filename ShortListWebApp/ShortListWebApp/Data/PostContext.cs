@@ -12,6 +12,7 @@ namespace ShortListWebApp.Data
         public PostContext(DbContextOptions<PostContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Post> Post { get; set; }

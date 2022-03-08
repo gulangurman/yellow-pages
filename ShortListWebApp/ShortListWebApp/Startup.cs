@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+
 using ShortListWebApp.Data;
 
 namespace ShortListWebApp
@@ -25,9 +26,8 @@ namespace ShortListWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-
-            services.AddDbContext<PostContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PostContext")));
+            var connString = Configuration.GetConnectionString("PostContext"); // .Replace("~", _env.ContentRootPath);
+            services.AddDbContext<PostContext>(options => options.UseSqlite(connString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
