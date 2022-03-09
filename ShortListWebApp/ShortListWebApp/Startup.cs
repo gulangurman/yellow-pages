@@ -34,8 +34,7 @@ namespace ShortListWebApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // app.UsePathBase("/shortlist");
-            app.Use(async (context, next) => { context.Request.PathBase = "/shortlist"; await next.Invoke(); });
-
+            
 
             if (env.IsDevelopment())
             {
@@ -43,6 +42,9 @@ namespace ShortListWebApp
             }
             else
             {
+                // Fix for production server reverse proxy subdir
+                app.Use(async (context, next) => { context.Request.PathBase = "/shortlist"; await next.Invoke(); });
+
                 app.UseExceptionHandler("/Error");
             }
 
