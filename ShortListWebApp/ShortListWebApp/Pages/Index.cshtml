@@ -7,6 +7,9 @@
 <div class="text-center">
     <h1 class="display-4">Today's Posts</h1>
     <p>Read today's posts here.</p>
+    <p>Or 
+    <a asp-page="/Posts/Create">Create New Post</a>.
+</p>
 
     @foreach(var post in Model.Post)
     {
