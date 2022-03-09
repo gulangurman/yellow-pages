@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ShortListMVC.Models.Post>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Today's Posts</h1>
+    <p>Read today's posts here.</p>
+    <p>Or 
+    <a asp-controller="Posts" asp-action="Create">Create New Post</a>.
+</p>
+
+    @foreach(var post in Model)
+    {
+        <h2>@post.Title</h2>
+        <p>@post.Content</p>
+    }
+</div>
