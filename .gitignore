@@ -364,3 +364,5 @@ MigrationBackup/
 # !/packages/*/lib/*.dll
 # !/packages/*/lib/*/*.dll
 *.db
+*.db-shm
+*.db-wal
