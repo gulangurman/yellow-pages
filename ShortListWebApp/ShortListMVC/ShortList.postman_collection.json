@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "3d0ca8a1-3eb3-4508-9fb3-fb1be99dbc2c",
+		"name": "ShortList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reverse proxy",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_proxy}}",
+							"host": [
+								"{{base_url_proxy}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_proxy}}/Posts",
+							"host": [
+								"{{base_url_proxy}}"
+							],
+							"path": [
+								"Posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_proxy}}/Posts/1",
+							"host": [
+								"{{base_url_proxy}}"
+							],
+							"path": [
+								"Posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.variables.get(\"base_url_proxy\");\r",
+									"pm.sendRequest(`${url}/Posts/Create`, function (err, response) {\r",
+									"    if (err) {\r",
+									"        return console.error(err);\r",
+									"    } else {\r",
+									"        var body = response.text();\r",
+									"        const html = cheerio(body);\r",
+									"        var allInputs = html.find('input[name=\"__RequestVerificationToken\"]');\r",
+									"        var input = allInputs.first();\r",
+									"        var token = input.val();\r",
+									"        pm.environment.set('xsrf-token', token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Post.Title",
+									"value": "Test title",
+									"type": "text"
+								},
+								{
+									"key": "Post.Content",
+									"value": "Test content",
+									"type": "text"
+								},
+								{
+									"key": "Post.AccountId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "__RequestVerificationToken",
+									"value": "{{xsrf-token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_proxy}}/Posts/Create",
+							"host": [
+								"{{base_url_proxy}}"
+							],
+							"path": [
+								"Posts",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Direct",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{direct_url}}",
+							"host": [
+								"{{direct_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{direct_url}}/Posts",
+							"host": [
+								"{{direct_url}}"
+							],
+							"path": [
+								"Posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{direct_url}}/Posts/1",
+							"host": [
+								"{{direct_url}}"
+							],
+							"path": [
+								"Posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/Posts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.variables.get(\"direct_url\");\r",
+									"pm.sendRequest(`${url}/Posts/Create`, function (err, response) {\r",
+									"    if (err) {\r",
+									"        return console.error(err);\r",
+									"    } else {\r",
+									"        var body = response.text();\r",
+									"        const html = cheerio(body);\r",
+									"        var allInputs = html.find('input[name=\"__RequestVerificationToken\"]');\r",
+									"        var input = allInputs.first();\r",
+									"        var token = input.val();\r",
+									"        pm.environment.set('xsrf-token', token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Post.Title",
+									"value": "Test title",
+									"type": "text"
+								},
+								{
+									"key": "Post.Content",
+									"value": "Test content",
+									"type": "text"
+								},
+								{
+									"key": "Post.AccountId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "__RequestVerificationToken",
+									"value": "{{xsrf-token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{direct_url}}/Posts/Create",
+							"host": [
+								"{{direct_url}}"
+							],
+							"path": [
+								"Posts",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "xsrf-token",
+			"value": ""
+		},
+		{
+			"key": "base_url_proxy",
+			"value": "https://pinkhatapps.com/shortlist",
+			"type": "default"
+		},
+		{
+			"key": "direct_url",
+			"value": "http://213.238.181.117:64000",
+			"type": "default"
+		}
+	]
+}
