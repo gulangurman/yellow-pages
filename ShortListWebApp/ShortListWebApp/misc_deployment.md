@@ -4,7 +4,7 @@
 
 Run the build
  
-    ASPNETCORE_URLS=http://127.0.0.1:64000 dotnet bin/Debug/net5.0/ShortListWebApp.dl
+    ASPNETCORE_URLS=http://127.0.0.1:64000 dotnet bin/Debug/net5.0/ShortListWebApp.dll
 
 Nginx reverse proxy setup
 
