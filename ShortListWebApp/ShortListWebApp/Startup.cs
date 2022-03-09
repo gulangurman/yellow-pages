@@ -34,6 +34,8 @@ namespace ShortListWebApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UsePathBase("/shortlist");
+            // app.Use(async (context, next) => { context.Request.PathBase = "/shortlist"; await next.Invoke(); });
+
 
             if (env.IsDevelopment())
             {
