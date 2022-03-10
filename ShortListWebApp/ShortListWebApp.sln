@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortListWebApp", "ShortListWebApp\ShortListWebApp.csproj", "{A3E168F2-B861-4D30-8AB8-F30DFC9D9F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShortListMVC", "ShortListMVC\ShortListMVC.csproj", "{A2BA6F6C-E8F9-4711-B500-F76B1F4EB290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A3E168F2-B861-4D30-8AB8-F30DFC9D9F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3E168F2-B861-4D30-8AB8-F30DFC9D9F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3E168F2-B861-4D30-8AB8-F30DFC9D9F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3E168F2-B861-4D30-8AB8-F30DFC9D9F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BA6F6C-E8F9-4711-B500-F76B1F4EB290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BA6F6C-E8F9-4711-B500-F76B1F4EB290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BA6F6C-E8F9-4711-B500-F76B1F4EB290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BA6F6C-E8F9-4711-B500-F76B1F4EB290}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
