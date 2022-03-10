@@ -24,6 +24,7 @@ Systemd setup to start automatically after boot
 
 Add this to /etc/systemd/system
 ---
+
 [Unit]
 Description=ShortList service
 
@@ -44,7 +45,13 @@ WantedBy=multi-user.target
 
 sudo systemctl daemon-reload
 sudo systemctl start pha.shortlist.service
-sudo systemctl restart pha.shortlist.service
 sudo systemctl status pha.shortlist.service
-
-
+---
+ 
+ git pull
+ rm -rf bin
+ rm -rf obj
+ dotnet ef database update --context ApplicationDbContext
+ dotnet ef database update --context PostContext
+ dotnet build
+ sudo systemctl restart pha.shortlist.service
