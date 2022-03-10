@@ -6,13 +6,23 @@
 <div class="text-center">
     <h1 class="display-4">Today's Posts</h1>
     <p>Read today's posts here.</p>
-    <p>Or 
-    <a asp-controller="Posts" asp-action="Create">Create New Post</a>.
-</p>
+    <p>Or <a asp-controller="Posts" asp-action="Create">Create New Post</a>.</p>
 
-    @foreach(var post in Model)
-    {
-        <h2>@post.Title</h2>
-        <p>@post.Content</p>
-    }
+    <div class="row" data-masonry='{"percentPosition": true }'>
+        @foreach (var post in Model)
+        {
+            <div class="col-md-3">
+                <div class="card my-3">
+                    <img src="https://www.markuptag.com/images/image-four.jpg" class="img-fluid" alt="thumbnail">
+                    <div class="card-body">
+                        <h3 class="card-title">@post.Title</h3>
+                        <p class="card-text">@post.Content</p>
+                        <a asp-controller="Posts" asp-action="Details" asp-route-id=@post.Id class="btn btn-link stretched-link">
+                            İlana git
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
