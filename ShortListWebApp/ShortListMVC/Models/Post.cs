@@ -11,5 +11,7 @@ namespace ShortListMVC.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public int AccountId { get; set; }
+        public string ImageUrl { get; set; }
+        public string Tags { get; set; }
     }
 }

@@ -28,12 +28,15 @@
     {
         <div class="col-lg-4 col-xl-3">
             <div class="card my-3">
-                <img src="https://www.markuptag.com/images/image-four.jpg" class="img-fluid" alt="thumbnail">
+                @if (!string.IsNullOrEmpty(post.ImageUrl))
+                {
+                    <img src=@post.ImageUrl class="img-fluid" alt="thumbnail" />
+                }
                 <div class="card-body">
                     <h3 class="card-title">@post.Title</h3>
                     <p class="card-text">@post.Content</p>
                     <a asp-controller="Posts" asp-action="Details" asp-route-id=@post.Id class="stretched-link">
-                        
+
                     </a>
                 </div>
             </div>

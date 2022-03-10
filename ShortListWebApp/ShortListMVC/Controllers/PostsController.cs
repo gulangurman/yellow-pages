@@ -58,7 +58,7 @@ namespace ShortListMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,AccountId")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,AccountId,ImageUrl,Tags")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace ShortListMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,AccountId")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,AccountId,ImageUrl,Tags")] Post post)
         {
             if (id != post.Id)
             {
