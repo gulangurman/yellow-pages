@@ -13,22 +13,26 @@
             <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                 <div class="form-head">
                     <h4 class="title">Üye ol</h4>
-                    <form action="#!" method="post">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label>Kullanıcı adı</label>
                             <input name="password" type="text">
                         </div>
                         <div class="form-group">
-                            <label>E-posta</label>
-                            <input name="email" type="email">
+                            <label asp-for="Input.Email">E-posta</label>
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label>Şifre</label>
-                            <input name="password" type="password">
+                            <label asp-for="Input.Password">Şifre</label>
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label>Şifreyi onayla</label>
-                            <input name="password" type="password">
+                            <label asp-for="Input.ConfirmPassword">Şifreyi onayla</label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                         <div class="check-and-pass">
                             <div class="row align-items-center">
@@ -45,10 +49,10 @@
                             </div>
                         </div>
                         <div class="button">
-                            <button type="submit" class="btn">Üye ol</button>
+                            <button id="registerSubmit" type="submit" class="btn">Üye ol</button>
                         </div>
                         <p class="outer-link">
-                            Zaten üye misiniz? <a href="login.html"> Giriş yap</a>
+                            Zaten üye misiniz? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"> Giriş yap</a>
                         </p>
                     </form>
                 </div>
@@ -104,7 +108,7 @@
                                     <p>
 @foreach (var provider in Model.ExternalLogins)
 {
-                                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
 }
                                     </p>
                                 </div>
