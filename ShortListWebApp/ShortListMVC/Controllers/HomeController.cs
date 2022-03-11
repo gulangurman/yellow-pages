@@ -22,7 +22,7 @@ namespace ShortListMVC.Controllers
             return View(await _postContext.Post.ToListAsync());           
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
