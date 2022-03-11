@@ -4,50 +4,203 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<section class="dashboard section" style="margin-top:140px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-menu">
+                        <ul>
+                            <li><a href="my-items.html"><i class="lni lni-bolt-alt"></i>İlanlarım</a></li>
+                            <li>
+                                <a class="active" href="post-item.html">
+                                    <i class="lni lni-circle-plus"></i> İlan ver
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="button">
+                            <a class="btn" href="">Çıkış yap</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">İlan ver</h3>
+                        <div class="inner-block">
+                            <div class="post-ad-tab">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade active show" id="nav-item-info" role="tabpanel" aria-labelledby="nav-item-info-tab">
+                                        <div class="step-one-content">
+                                            <form asp-action="Create" class="default-form-style" method="post">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="Title" class="control-label">Başlık*</label>
+                                                            <input asp-for="Title" class="form-control" placeholder="Başlık giriniz" />
+                                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label>Kategori</label>
+                                                            <div class="selector-head">
+                                                                <span class="arrow"><i class="lni lni-chevron-down"></i></span>
+                                                                <select class="user-chosen-select">
+                                                                    <option value="none" selected disabled>Kategori seçiniz</option>
+                                                                    <option value="none">Kayıp/Buluntu</option>
+                                                                    <option value="none">Evcil Hayvan</option>
+                                                                    <option value="none">İkinci El</option>
+                                                                    <option value="none">Eleman Aranıyor</option>
+                                                                    <option value="none">Serbest Çalışanlar</option>
+                                                                    <option value="none">Etkinlikler</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label>Şehir</label>
+                                                            <div class="selector-head">
+                                                                <span class="arrow"><i class="lni lni-chevron-down"></i></span>
+                                                                <select class="user-chosen-select">
+                                                                    <option value="none">Şehir seçiniz</option>
+                                                                    <option value="none">İstanbul</option>
+                                                                    <option value="none">Ankara</option>
+                                                                    <option value="none">İzmir</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0 mt-3">
+                                                            <label asp-for="Content" class="control-label">Açıklama*</label>
+                                                            <textarea asp-for="Content" class="form-control" placeholder="Açıklama giriniz" rows="5" cols="40"></textarea>
+                                                            <span asp-validation-for="Content" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="Tags" class="tag-label">Etiketler</label>
+                                                            <input asp-for="Tags" class="form-control" placeholder="Etiket giriniz" />
+                                                            <span asp-validation-for="Tags" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="ImageUrl" class="control-label">Resim</label>
+                                                            <input asp-for="ImageUrl" class="form-control" placeholder="Link giriniz" />
+                                                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12" style="display:none">
+                                                        <label asp-for="AccountId" class="control-label"></label>
+                                                        <input asp-for="AccountId" class="form-control" disabled />
+                                                        <span asp-validation-for="AccountId" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="col-12 form-check" style="padding-left: 2.5em; margin-bottom: 1.125rem">
+                                                        <input checked class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            <a href="#">Kullanım şartları</a>nı kabul ediyorum
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group button mb-0">
+                                                            <button type="submit" class="btn">İlan ver</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+<section class="call-action overlay section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 offset-lg-2 col-12">
+                <div class="inner">
+                    <div class="content">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">
+                            Siz de ilanınızı Sarı Sayfalar'da verin<br>
+                            zamandan tasarruf edin
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Sarı sayfalar ile siz de zaman kazanın<br> Sarı Sayfalar'da ilan vermek çok kolay!</p>
+                        <div class="button wow fadeInUp" data-wow-delay=".8s">
+                            <a asp-controller="Posts" asp-action="Create" class="btn">Hemen ilan ver</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+</section>
+<!--
+<div class="col-lg-6 col-12">
+    <div class="upload-input">
+        <input type="file" id="upload" name="upload">
+        <label for="upload" class="text-center content">
+            <span class="text">
+                <span class="d-block mb-15">
+                    Drop files anywhere
+                    to Upload
+                </span>
+                <span class=" mb-15 plus-icon"><i class="lni lni-plus"></i></span>
+                <span class="main-btn d-block btn-hover">
+                    Select
+                    File
+                </span>
+                <span class="d-block">
+                    Maximum upload file size
+                    10Mb
+                </span>
+            </span>
+        </label>
+    </div>
+</div>
+<div class="col-12">
+    <div class="google-map">
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org"></a><br>
+                <style>
+                    .mapouter {
+                        position: relative;
+                        text-align: right;
+                        height: 300px;
+                        width: 100%;
+                    }
+                </style><a href="https://www.embedgooglemap.net">
+                    embed
+                    google maps wordpress
+                </a>
+                <style>
+                    .gmap_canvas {
+                        overflow: hidden;
+                        background: none !important;
+                        height: 300px;
+                        width: 100%;
+                    }
+                </style>
             </div>
-             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" class="form-control" />
-                <span asp-validation-for="Tags" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountId" class="control-label"></label>
-                <input asp-for="AccountId" class="form-control"/>
-                <span asp-validation-for="AccountId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+-->
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
