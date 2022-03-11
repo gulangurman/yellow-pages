@@ -27,6 +27,13 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
+        public async Task<IActionResult> UserPosts()
+        {
+            return View(await _context.Post
+                .Where(post => post.AccountId == 2)
+                .ToListAsync());
+        }
+
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)
         {

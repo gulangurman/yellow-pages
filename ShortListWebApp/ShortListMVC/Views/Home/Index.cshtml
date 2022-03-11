@@ -148,7 +148,7 @@
                             @if (!string.IsNullOrEmpty(post.ImageUrl))
                             {
                                 <div class="image">
-                                    <a href="item-details.html" class="thumbnail"><img src="@post.ImageUrl" alt="#"></a>
+                                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id" class="thumbnail"><img src="@post.ImageUrl" alt="#"></a>
                                     <div class="author">
                                         <div class="author-image">
                                             <a href="javascript:void(0)">
@@ -165,7 +165,7 @@
                                 <div class="top-content">
                                     <a href="javascript:void(0)" class="tag">Kategori</a>
                                     <h3 class="title">
-                                        <a href="item-details.html">@post.Title</a>
+                                        <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                     </h3>
                                     <p class="update-time">Son güncelleme: 1 saat önce</p>
                                     <ul class="rating">

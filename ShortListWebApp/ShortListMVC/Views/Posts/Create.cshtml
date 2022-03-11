@@ -4,16 +4,16 @@
     ViewData["Title"] = "Create";
 }
 
-<section class="dashboard section" style="margin-top:140px">
+<section class="dashboard section" style="margin-top:100px">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
                 <div class="dashboard-sidebar">
                     <div class="dashboard-menu">
                         <ul>
-                            <li><a href="my-items.html"><i class="lni lni-bolt-alt"></i>İlanlarım</a></li>
+                            <li><a asp-controller="Posts" asp-action="UserPosts"><i class="lni lni-bolt-alt"></i>İlanlarım</a></li>
                             <li>
-                                <a class="active" href="post-item.html">
+                                <a class="active" asp-controller="Posts" asp-action="Create">
                                     <i class="lni lni-circle-plus"></i> İlan ver
                                 </a>
                             </li>
