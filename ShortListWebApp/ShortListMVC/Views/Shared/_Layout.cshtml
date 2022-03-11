@@ -155,13 +155,13 @@
                                      -->
                                 </ul>
                                 <div class="login-button">
-                                <partial name="_LoginPartial" />
-                            </div>
-                            <div class="button header-button">
-                                <a asp-controller="Posts" asp-action="Create" aria-label="Create ad" class="btn">İlan ver</a>
-                            </div>
+                                    <partial name="_LoginPartial" />
+                                </div>
+                                <div class="button header-button">
+                                    <a asp-controller="Posts" asp-action="Create" aria-label="Create ad" class="btn">İlan ver</a>
+                                </div>
                             </div> <!-- navbar collapse -->
-                            
+
                         </nav> <!-- navbar -->
                     </div>
                 </div>
@@ -197,12 +197,11 @@
 
 
     <footer class="footer">
-        <!-- Start Footer Top -->
+        <!--
         <div class="footer-top">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Single Widget -->
                         <div class="single-footer mobile-app">
                             <h3>Mobile Apps</h3>
                             <div class="app-button">
@@ -222,10 +221,8 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- End Single Widget -->
                     </div>
                     <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Single Widget -->
                         <div class="single-footer f-link">
                             <h3>Locations</h3>
                             <div class="row">
@@ -248,10 +245,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Widget -->
                     </div>
                     <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Single Widget -->
                         <div class="single-footer f-link">
                             <h3>Quick Links</h3>
                             <ul>
@@ -262,24 +257,20 @@
                                 <li><a href="javascript:void(0)">Help & Support</a></li>
                             </ul>
                         </div>
-                        <!-- End Single Widget -->
                     </div>
                     <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Single Widget -->
                         <div class="single-footer f-contact">
-                            <h3>Contact</h3>
+                            <h3>İletişim</h3>
                             <ul>
-                                <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
-                                <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+                                <li>34843 Maltepe<br> Istanbul</li>
+                                <li>E-posta: pinkhatapps@gmail.com</li>
                             </ul>
                         </div>
-                        <!-- End Single Widget -->
                     </div>
                 </div>
             </div>
         </div>
-        <!--/ End Footer Middle -->
-        <!-- Start Footer Bottom -->
+        -->
         <div class="footer-bottom">
             <div class="container">
                 <div class="inner">
@@ -287,15 +278,13 @@
                         <div class="col-12">
                             <div class="content">
                                 <ul class="footer-bottom-links">
-                                    <li><a href="javascript:void(0)">Terms of use</a></li>
-                                    <li><a href="javascript:void(0)"> Privacy Policy</a></li>
-                                    <li><a href="javascript:void(0)">Advanced Search</a></li>
-                                    <li><a href="javascript:void(0)">Site Map</a></li>
-                                    <li><a href="javascript:void(0)">Information</a></li>
+                                    <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                                    <li><a asp-controller="Posts" asp-action="Index"> Yeni Gelenler</a></li>
+                                    <li><a asp-controller="Home" asp-action="About">Hakkında</a></li>
                                 </ul>
                                 <p class="copyright-text">
-                                    Designed and Developed by <a href="https://graygrids.com/"
-                                                                 rel="nofollow" target="_blank">GrayGrids</a>
+                                    &copy; 2022 - <a href="https://pinkhatapps.com/"
+                                                     rel="nofollow" target="_blank">PinkHatApps</a>
                                 </p>
                                 <ul class="footer-social">
                                     <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
@@ -309,7 +298,7 @@
                 </div>
             </div>
         </div>
-        <!-- End Footer Middle -->
+
     </footer>
     <a href="#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>

@@ -6379,7 +6379,7 @@ blockquote .shape {
 }
 
 .footer .footer-bottom .inner {
-  border-top: 1px solid #ebebeb4f;
+  /* border-top: 1px solid #ebebeb4f; */
   padding: 50px 0;
 }
 
