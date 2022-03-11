@@ -1276,7 +1276,7 @@ ol {
 }
 
 .header .login-button {
-  margin-left: 40px;
+  /* margin-left: 40px; */
 }
 
 .header .login-button ul {
@@ -4949,13 +4949,14 @@ blockquote .shape {
     padding: 20px 0;
   }
 
-  .header .header-button {
-    display: none;
-  }
+    .header .header-button {
+        /* display: none; */
+    }
 
-  .header .login-button {
-    display: none;
-  }
+    .header .login-button {
+        /* display: none; */
+        margin-left: 0px;
+    }
 
   .header .navbar-collapse {
     top: 59px !important;
