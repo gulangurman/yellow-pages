@@ -47,6 +47,7 @@ namespace ShortListMVC.Controllers
             // string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;           
             return View(await _context.Post
                 .Where(post => post.AccountId.Equals(id))
+                .Include(x => x.Category)
                 .ToListAsync());
         }
 
