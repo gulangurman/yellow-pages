@@ -6,7 +6,7 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li>
-            <a asp-controller="Posts" asp-action="UserPosts">@User.Identity.Name</a>
+            <a asp-controller="Posts" asp-action="UserPosts">@User.Identity?.Name</a>
         </li>
         <!--
         <li>
