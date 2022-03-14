@@ -48,6 +48,7 @@ sudo systemctl start pha.shortlist.service
 sudo systemctl status pha.shortlist.service
 ---
  
+ cd /home/janeway/source/shortlist/ShortListWebApp/ShortListMVC
  git pull
  rm -rf bin
  rm -rf obj
