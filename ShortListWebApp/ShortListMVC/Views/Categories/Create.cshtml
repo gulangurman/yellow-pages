@@ -1,0 +1,89 @@
+﻿@model ShortListMVC.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="dashboard section" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-menu">
+                        <ul>
+                            <li><a asp-controller="Categories" asp-action="Index"><i class="lni lni-bolt-alt"></i>Kategoriler</a></li>
+                            <li>
+                                <a class="active" asp-controller="Categories" asp-action="Create">
+                                    <i class="lni lni-circle-plus"></i> Kategori ekle
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="button">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button class="btn" type="submit">Çıkış yap</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">Kategori ekle</h3>
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Slug" class="control-label"></label>
+                                <input asp-for="Slug" class="form-control" />
+                                <span asp-validation-for="Slug" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Icon" class="control-label"></label>
+                                <input asp-for="Icon" class="form-control" />
+                                <span asp-validation-for="Icon" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="call-action overlay section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 offset-lg-2 col-12">
+                <div class="inner">
+                    <div class="content">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">
+                            Siz de ilanınızı Sarı Sayfalar'da verin<br>
+                            zamandan tasarruf edin
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Sarı sayfalar ile siz de zaman kazanın<br> Sarı Sayfalar'da ilan vermek çok kolay!</p>
+                        <div class="button wow fadeInUp" data-wow-delay=".8s">
+                            <a asp-controller="Posts" asp-action="Create" class="btn">Hemen ilan ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

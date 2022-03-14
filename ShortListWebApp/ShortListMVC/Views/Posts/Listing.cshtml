@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShortListMVC.Models.Post>
+﻿@model ShortListMVC.Models.ListingViewModel
 @{
     ViewData["Title"] = "İlanlar";
 }
@@ -20,37 +20,26 @@
 
                     <div class="single-widget">
                         <h3>Kategoriler</h3>
-                        <ul class="list">
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-dinner"></i> Kayıp/Buluntu<span>15</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-control-panel"></i> Evcil Hayvan <span>20</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-bullhorn"></i> İkinci El <span>55</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-tshirt"></i> Eleman Aranıyor <span>55</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-home"></i> Serbest Çalışanlar<span>35</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-bolt"></i> Etkinlikler <span>60</span></a>
-                            </li>
+                        @if (Model.Categories.Count() == 0)
+                        {
+                            <p>Kategori yok.</p>
+                        }
+                        else
+                        {
+                            <ul class="list">
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <li>
+                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Slug"><i class="lni lni-@item.Icon"></i> @item.Name<span>15</span></a>
+                                    </li>
+                                }
+                            </ul>
+                        }
 
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <i class="lni lni-diamond-alt"></i> Jewelry &amp; Accessories
-                                    <span>45</span>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
 
-
-                    <div class="single-widget range">
+                    <!--
+                           <div class="single-widget range">
                         <h3>Price Range</h3>
                         <input type="range" class="form-range" name="range" step="1" min="100" max="10000" value="10" onchange="rangePrimary.value=value">
                         <div class="range-inner">
@@ -59,8 +48,9 @@
                         </div>
                     </div>
 
-
-                    <div class="single-widget condition">
+                    -->
+                    <!--
+                         <div class="single-widget condition">
                         <h3>Condition</h3>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
@@ -82,6 +72,7 @@
                         </div>
                     </div>
 
+                    -->
                     <!--
                          <div class="single-widget banner">
                         <h3>Advertisement</h3>
@@ -91,7 +82,7 @@
                     </div>
 
                     -->
-                   
+
 
                 </div>
             </div>
@@ -115,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                @foreach (var post in Model)
+                                @foreach (var post in Model.Posts)
                                 {
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="single-item-grid">
@@ -129,7 +120,7 @@
                                                         <i class=" cross-badge lni lni-bolt"></i>
                                                     <span class="flat-badge sale">Yeni</span>
                                                     -->
-                                                </div>
+                                        </div>
                                             }
                                             <div class="content">
                                                 <a href="javascript:void(0)" class="tag">@post.Tags</a>
