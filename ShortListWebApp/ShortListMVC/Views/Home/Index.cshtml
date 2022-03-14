@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ShortListMVC.Models.Post>
+﻿@model ShortListMVC.Models.HomeViewModel;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Anasayfa";
 }
 
 <section class="hero-area overlay">
@@ -26,28 +26,31 @@
                                     <input type="text" name="keyword" id="keyword" placeholder="Anahtar kelime">
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-12 p-0">
-                                <div class="search-input">
-                                    <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
-                                    <select name="category" id="category">
-                                        <option value="none" selected disabled>Kategoriler</option>
-                                        <option value="none">Kayıp/Buluntu</option>
-                                        <option value="none">Evcil Hayvan</option>
-                                        <option value="none">İkinci El</option>
-                                        <option value="none">Eleman Aranıyor</option>
-                                        <option value="none">Serbest Çalışanlar</option>
-                                        <option value="none">Etkinlikler</option>
-                                    </select>
+                            @if (Model.Categories != null)
+                            {
+                                <div class="col-lg-3 col-md-3 col-12 p-0">
+                                    <div class="search-input">
+                                        <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
+                                        <select name="category" id="category">
+                                            <option value="none" selected disabled>Kategoriler</option>
+                                            @foreach (var cat in Model.Categories)
+                                            {
+                                                <option value="@cat.Id">@cat.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
                             <div class="col-lg-3 col-md-3 col-12 p-0">
                                 <div class="search-input">
                                     <label for="location"><i class="lni lni-map-marker theme-color"></i></label>
                                     <select name="location" id="location">
                                         <option value="none" selected disabled>Şehir</option>
-                                        <option value="none">İstanbul</option>
-                                        <option value="none">Ankara</option>
-                                        <option value="none">İzmir</option>
+                                        <option value="34">İstanbul</option>
+                                        <option value="06">Ankara</option>
+                                        <option value="35">İzmir</option>
                                     </select>
                                 </div>
                             </div>
@@ -64,68 +67,32 @@
         </div>
     </div>
 </section>
-<section class="categories">
-    <div class="container">
-        <div class="cat-inner">
-            <div class="row">
-                <div class="col-12 p-0">
-                    <div class="category-slider">
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/controller.svg" alt="#">
-                            </div>
-                            <h3>Kayıp/Buluntu</h3>
-                            <h5 class="total">35</h5>
-                        </a>
-
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/matrimony.svg" alt="#">
-                            </div>
-                            <h3>Evcil Hayvan</h3>
-                            <h5 class="total">22</h5>
-                        </a>
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/car.svg" alt="#">
-                            </div>
-                            <h3>İkinci El</h3>
-                            <h5 class="total">55</h5>
-                        </a>
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/travel.svg" alt="#">
-                            </div>
-                            <h3>Eleman Aranıyor</h3>
-                            <h5 class="total">21</h5>
-                        </a>
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/laptop.svg" alt="#">
-                            </div>
-                            <h3>Serbest Çalışanlar</h3>
-                            <h5 class="total">44</h5>
-                        </a>
-
-                        <a href="category.html" class="single-cat">
-                            <div class="icon">
-                                <img src="assets/images/categories/real-estate.svg" alt="#">
-                            </div>
-                            <h3>Etkinlikler</h3>
-                            <h5 class="total">65</h5>
-                        </a>
-
+@if (Model.Categories != null)
+{
+    <section class="categories">
+        <div class="container">
+            <div class="cat-inner">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <div class="category-slider">
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <a asp-controller="Posts" asp-action="Listing" asp-route-category="@cat.Slug" class="single-cat">
+                                    <div class="icon">
+                                        <img src="assets/images/categories/@(cat.Icon).svg" alt="#">
+                                    </div>
+                                    <h3>@cat.Name</h3>
+                                    <h5 class="total">35</h5>
+                                </a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
+
 <section class="items-grid section custom-padding">
     <div class="container">
         <div class="row">
@@ -140,7 +107,7 @@
         </div>
         <div class="single-head">
             <div class="row">
-                @foreach (var post in Model)
+                @foreach (var post in Model.Posts)
                 {
                     <div class="col-lg-4 col-md-6 col-12">
 
@@ -152,18 +119,21 @@
                                     <div class="author">
                                         <div class="author-image">
                                             <a href="javascript:void(0)">
-                                                <img src="assets/images/items-grid/author-1.jpg" alt="#">
-                                                <span>İlan Sahibi</span>
+                                                <!--
+                                                <img src="assets/images/items-grid/author-1.jpg" alt="#"/>                                                                                              -->
+                                        <span>İlan Sahibi</span>
                                             </a>
                                         </div>
-                                        <p class="sale">Yeni</p>
+                                        <!--
+                                            <p class="sale">Yeni</p>
+                                        -->                                        
                                     </div>
                                 </div>
                             }
 
                             <div class="content">
                                 <div class="top-content">
-                                    <a href="javascript:void(0)" class="tag">Kategori</a>
+                                    <a href="javascript:void(0)" class="tag">@post.Category.Name</a>
                                     <h3 class="title">
                                         <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                     </h3>

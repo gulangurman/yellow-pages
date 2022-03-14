@@ -70,8 +70,22 @@ namespace ShortListMVC.Controllers
 
         // GET: Posts/Create
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+
+            ViewBag.Categories = await _context.Category
+                     .Select(cat => new SelectListItem
+                     {
+                         Value = cat.Id.ToString(),
+                         Text = cat.Name
+                     }).ToListAsync();
+            /*
+             ViewBag.Categories.Insert(0, new SelectListItem()
+            {
+                Text = "----Kategori----",
+                Value = string.Empty
+            });
+             */
             return View();
         }
 
@@ -81,17 +95,25 @@ namespace ShortListMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,AccountId,ImageUrl,Tags")] Post post)
+        public async Task<IActionResult> Create([Bind("Title,Content,ImageUrl,Tags,CategoryId")] CreatePostViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                var id = _userManager.GetUserId(User);
-                post.AccountId = id;
+                Post post = new Post
+                {
+                    Title = vm.Title,
+                    Content = vm.Content,
+                    CategoryId = vm.CategoryId,
+                    Tags = vm.Tags,
+                    ImageUrl = vm.ImageUrl
+                };
+                var userid = _userManager.GetUserId(User);
+                post.AccountId = userid;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), "Home");
             }
-            return View(post);
+            return View(vm);
         }
 
         // GET: Posts/Edit/5

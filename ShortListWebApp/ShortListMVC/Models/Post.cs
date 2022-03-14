@@ -13,5 +13,8 @@ namespace ShortListMVC.Models
         public string AccountId { get; set; }
         public string ImageUrl { get; set; }
         public string Tags { get; set; }
+
+        public int? CategoryId { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

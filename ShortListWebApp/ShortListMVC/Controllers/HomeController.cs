@@ -19,7 +19,10 @@ namespace ShortListMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _postContext.Post.ToListAsync());           
+            HomeViewModel model = new HomeViewModel();
+            model.Categories = await _postContext.Category.ToListAsync();
+            model.Posts = await _postContext.Post.Take(6).ToListAsync();
+            return View(model);
         }
 
         public IActionResult About()

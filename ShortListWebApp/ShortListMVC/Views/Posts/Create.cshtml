@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    //var Categories = (IList<Category>)ViewBag.Categories;
 }
 
 <section class="dashboard section" style="margin-top:100px">
@@ -15,6 +16,12 @@
                             <li>
                                 <a asp-controller="Posts" asp-action="Create">
                                     <i class="lni lni-circle-plus"></i> İlan ver
+                                </a>
+                            </li>
+                            <li><a class="active" asp-controller="Categories" asp-action="Index"><i class="lni lni-bolt-alt"></i>Kategoriler</a></li>
+                            <li>
+                                <a asp-controller="Categories" asp-action="Create">
+                                    <i class="lni lni-circle-plus"></i> Kategori ekle
                                 </a>
                             </li>
                         </ul>
@@ -47,17 +54,12 @@
                                                     </div>
                                                     <div class="col-lg-6 col-12">
                                                         <div class="form-group mb-0">
+
                                                             <label>Kategori</label>
                                                             <div class="selector-head">
                                                                 <span class="arrow"><i class="lni lni-chevron-down"></i></span>
-                                                                <select class="user-chosen-select">
-                                                                    <option value="none" selected disabled>Kategori seçiniz</option>
-                                                                    <option value="none">Kayıp/Buluntu</option>
-                                                                    <option value="none">Evcil Hayvan</option>
-                                                                    <option value="none">İkinci El</option>
-                                                                    <option value="none">Eleman Aranıyor</option>
-                                                                    <option value="none">Serbest Çalışanlar</option>
-                                                                    <option value="none">Etkinlikler</option>
+                                                                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="user-chosen-select">
+                                                                    <option value="none" selected disabled>Kategori seçiniz</option>                                                                   
                                                                 </select>
                                                             </div>
                                                         </div>
