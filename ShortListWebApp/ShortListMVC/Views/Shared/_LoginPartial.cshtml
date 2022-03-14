@@ -6,10 +6,15 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li>
+            <a asp-controller="Posts" asp-action="UserPosts">@User.Identity.Name</a>
+        </li>
+        <!--
+        <li>
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" style="font-size: 14px;font-weight: 500;" class="btn text-dark"><i class="lni lni-exit" style="color:#5830E0;margin-right: 8px"></i>Çıkış yap</button>
             </form>
         </li>
+        -->
     }
     else
     {

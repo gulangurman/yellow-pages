@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +17,12 @@ namespace ShortListMVC.Controllers
     public class PostsController : Controller
     {
         private readonly PostContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public PostsController(PostContext context)
+        public PostsController(PostContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Posts
@@ -32,10 +36,14 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
+        // GET: UserPosts
         public async Task<IActionResult> UserPosts()
         {
+            var id = _userManager.GetUserId(User); // get user Id
+            var user = await _userManager.GetUserAsync(User); // get user's all data
+            // string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;           
             return View(await _context.Post
-                .Where(post => post.AccountId == 2)
+                .Where(post => post.AccountId.Equals(id))
                 .ToListAsync());
         }
 
@@ -74,6 +82,8 @@ namespace ShortListMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id = _userManager.GetUserId(User);
+                post.AccountId = id;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), "Home");
