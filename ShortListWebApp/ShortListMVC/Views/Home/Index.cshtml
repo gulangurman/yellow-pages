@@ -83,7 +83,7 @@
                         <div class="category-slider">
                             @foreach (var item in Model.CategoryStats)
                             {
-                                <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Category.Slug" class="single-cat">
+                                <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Category.Id" class="single-cat">
                                     <div class="icon">
                                         <img src="assets/images/categories/@(item.Category.Icon).svg" alt="#">
                                     </div>
