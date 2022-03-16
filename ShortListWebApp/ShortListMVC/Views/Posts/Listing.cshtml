@@ -30,7 +30,7 @@
                                 @foreach (var item in Model.Categories)
                                 {
                                     <li>
-                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Slug"><i class="lni lni-@item.Icon"></i> @item.Name<span>15</span></a>
+                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Id"><i class="lni lni-@item.Icon"></i> @item.Name<span>15</span></a>
                                     </li>
                                 }
                             </ul>

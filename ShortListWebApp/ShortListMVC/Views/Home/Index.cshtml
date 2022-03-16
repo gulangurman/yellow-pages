@@ -19,7 +19,9 @@
 
 
                     <div class="search-form wow fadeInUp" data-wow-delay=".7s">
-                        <div class="row">
+                        <form asp-controller="Posts" asp-action="Listing" method="get">
+                             <div class="row">
+
                             <div class="col-lg-4 col-md-4 col-12 p-0">
                                 <div class="search-input">
                                     <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
@@ -56,10 +58,14 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-12 p-0">
                                 <div class="search-btn button">
-                                    <button class="btn"><i class="lni lni-search-alt"></i> Ara</button>
+                                    <input type="submit" class="btn" value="İlanlarda Ara"/>
                                 </div>
                             </div>
                         </div>
+
+                        </form>
+                       
+
                     </div>
 
                 </div>
@@ -188,26 +194,7 @@
     </div>
 </section>
 
-<!--
-    <div class="text-center">
-    <p>Güncel ilanlar</p>
-    <p><a asp-controller="Posts" asp-action="Create">Yeni ilan oluştur</a></p>
-</div>
-
-<div class="row text-center">
-    <div class="col-md-6 mx-auto">
-        <h4>İlan ara</h4>
-        <p class="mb-3">Anahtar kelime ile arama yapabilirsiniz.</p>
-
-        <form action="" class="">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control form-control-lg" placeholder="Anahtar kelime giriniz..">
-                <button type="submit" class="input-group-text btn-success"><i class="bi bi-search me-2"></i> Ara</button>
-            </div>
-        </form>
-    </div>
-
-</div>
+<!--  
 
 <div class="row" data-masonry='{"percentPosition": true }'>
     @@foreach (var post in Model)
