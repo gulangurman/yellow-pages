@@ -56,3 +56,29 @@ sudo systemctl status pha.shortlist.service
  dotnet ef database update --context PostContext
  dotnet build
  sudo systemctl restart pha.shortlist.service
+
+ ---
+ Migrations:
+
+ To remove last migration:
+dotnet ef migrations remove
+or
+PM> Remove-Migration
+
+ To unapply and remove last migration:
+dotnet ef migrations remove --force
+or
+PM> Remove-Migration -Force
+
+To unapply a specific migration(s):
+dotnet ef database update LastGoodMigrationName
+or
+PM> Update-Database -Migration LastGoodMigrationName
+
+To unapply all migrations:
+dotnet ef database update 0
+or
+PM> Update-Database -Migration 0
+
+To remove all migrations:
+just remove Migrations folder.
