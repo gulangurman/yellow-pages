@@ -20,17 +20,17 @@
 
                     <div class="single-widget">
                         <h3>Kategoriler</h3>
-                        @if (Model.Categories.Count() == 0)
+                        @if (Model.CategoryStats.Count() == 0)
                         {
                             <p>Kategori yok.</p>
                         }
                         else
                         {
                             <ul class="list">
-                                @foreach (var item in Model.Categories)
+                                @foreach (var item in Model.CategoryStats)
                                 {
                                     <li>
-                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Id"><i class="lni lni-@item.Icon"></i> @item.Name<span>15</span></a>
+                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Category.Id"><i class="lni lni-@item.Category.Icon"></i> @item.Category.Name<span>@item.CategoryPosts</span></a>
                                     </li>
                                 }
                             </ul>

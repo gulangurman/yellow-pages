@@ -22,6 +22,15 @@ namespace ShortListMVC.Controllers
             HomeViewModel model = new HomeViewModel();
             model.Categories = await _postContext.Category.ToListAsync();
             model.Posts = await _postContext.Post.Take(6).ToListAsync();
+           
+            model.CategoryStats = await _postContext.Post
+                .Include(c => c.Category)
+                .GroupBy(p => p.CategoryId)
+                .Select(x => new CategoryStatsViewModel()
+                {
+                    Category = x.FirstOrDefault().Category,
+                    CategoryPosts = x.Count()
+                }).ToListAsync();
             return View(model);
         }
 

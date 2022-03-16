@@ -31,11 +31,40 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
-        public async Task<IActionResult> Listing(string category = null)
+        public async Task<IActionResult> Listing(int category)
         {
             ListingViewModel model = new ListingViewModel();
-            model.Categories = await _context.Category.ToListAsync();
-            model.Posts = await _context.Post.ToListAsync();
+            model.CategoryStats = await _context.Post
+                .Include(c => c.Category)
+                .GroupBy(p => p.CategoryId)
+                .Select(x => new CategoryStatsViewModel()
+                {
+                    Category = x.FirstOrDefault().Category,
+                    CategoryPosts = x.Count()
+                }).ToListAsync();
+
+            if (category > 0)
+            {
+                model.Posts = await _context.Post.Where(p => p.CategoryId == category).ToListAsync();
+            }
+            else
+            {
+                model.Posts = await _context.Post.ToListAsync();
+            }
+
+            /*
+             if (string.IsNullOrWhiteSpace(category))
+            {
+                model.Posts = await _context.Post.ToListAsync();
+            }
+            else
+            {
+                model.Posts = await _context.Post.Include(p => p.Category)
+                    .Where(p => p.Category.Slug.ToLower().Equals(category.ToLower()))
+                    .ToListAsync();
+            }
+             */
+
             return View(model);
         }
 

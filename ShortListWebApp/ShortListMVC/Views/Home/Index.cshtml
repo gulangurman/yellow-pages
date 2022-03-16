@@ -81,14 +81,14 @@
                 <div class="row">
                     <div class="col-12 p-0">
                         <div class="category-slider">
-                            @foreach (var cat in Model.Categories)
+                            @foreach (var item in Model.CategoryStats)
                             {
-                                <a asp-controller="Posts" asp-action="Listing" asp-route-category="@cat.Slug" class="single-cat">
+                                <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.Category.Slug" class="single-cat">
                                     <div class="icon">
-                                        <img src="assets/images/categories/@(cat.Icon).svg" alt="#">
+                                        <img src="assets/images/categories/@(item.Category.Icon).svg" alt="#">
                                     </div>
-                                    <h3>@cat.Name</h3>
-                                    <h5 class="total">35</h5>
+                                    <h3>@item.Category.Name</h3>
+                                    <h5 class="total">@item.CategoryPosts</h5>
                                 </a>
                             }
                         </div>
