@@ -134,14 +134,14 @@ namespace ShortListMVC.Migrations
                         {
                             Id = "02174cf0–9412–4cfe - afbf - 59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb453aac-557f-481f-ba97-dadd9f5dc69a",
+                            ConcurrencyStamp = "fcd6c096-9b7c-4e2d-89e0-6f16402db1b6",
                             Email = "testuser@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "TESTUSER@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHivnH7TbE4i9HV2MMSyyi/bEMKtYOUh40GIdTkwW5rMsjtoO+3jM29DWDaKQDnkLw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKLkfAp0XWPlqwDnPjiDlLLw0vjvsgzPOCDhh4Cbmw05yV/0w/aCXeYU53Z9O3vhEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "76154faf-fa8f-4fe9-baf5-90c7d9821d33",
+                            SecurityStamp = "b61f2726-b5fa-4670-9796-82764d5bb322",
                             TwoFactorEnabled = false,
                             UserName = "Test User"
                         });
