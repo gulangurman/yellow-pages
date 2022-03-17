@@ -43,35 +43,49 @@
                                 <li><span>İlan tarihi:</span> @Model.CreatedDate.ToShortDateString()</li>
                             </ul>
                         </div>
-                        <div class="contact-info">
-                            <ul>
-                                @if (!string.IsNullOrWhiteSpace(Model.ContactPhone))
-                                {
-                                    <li>
-                                        <a href=@("tel:+90" + Model.ContactPhone) class="call">
-                                            <i class="lni lni-phone-set"></i>
-                                            @string.Format("({0}) {1} {2} {3}",Model.ContactPhone.Substring(0,3)
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="contact-info">
+                                <p>
+                                    Bu ilanın iletişim bilgilerini görebilmek için
+                                    <a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="/Posts/Details/@Model.Id">Üye olun</a> ya da
+                                    <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Posts/Details/@Model.Id">Giriş yapın</a>.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="contact-info">
+                                <ul>
+                                    @if (!string.IsNullOrWhiteSpace(Model.ContactPhone))
+                                    {
+                                        <li>
+                                            <a href=@("tel:+90" + Model.ContactPhone) class="call">
+                                                <i class="lni lni-phone-set"></i>
+                                                @string.Format("({0}) {1} {2} {3}",Model.ContactPhone.Substring(0,3)
                                         ,Model.ContactPhone.Substring(3,3)
                                         ,Model.ContactPhone.Substring(6,2)
                                         ,Model.ContactPhone.Substring(8,2)
                                         )
-                                            <span>İlan sahibini ara</span>
-                                        </a>
-                                    </li>
-                                }
-                                @if (!string.IsNullOrWhiteSpace(Model.ContactEmail))
-                                {
-                                    <li>
-                                        <a href=@("mailto:" + Model.ContactEmail) class="call">
-                                            <i class="lni lni-envelope"></i>
-                                            @Model.ContactEmail
-                                            <span>E-posta gönder</span>
-                                        </a>
-                                    </li>
-                                }
+                                                <span>İlan sahibini ara</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(Model.ContactEmail))
+                                    {
+                                        <li>
+                                            <a href=@("mailto:" + Model.ContactEmail) class="call">
+                                                <i class="lni lni-envelope"></i>
+                                                @Model.ContactEmail
+                                                <span>E-posta gönder</span>
+                                            </a>
+                                        </li>
+                                    }
 
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
+                        }
+
                         <!--
                              <div class="social-share">
                             <h4>Share Ad</h4>
