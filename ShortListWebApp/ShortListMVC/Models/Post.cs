@@ -16,5 +16,8 @@ namespace ShortListMVC.Models
 
         public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        public string? CityId { get; set; }
+        public City City { get; set; }
     }
 }
