@@ -82,3 +82,6 @@ PM> Update-Database -Migration 0
 
 To remove all migrations:
 just remove Migrations folder.
+
+To apply all migrations up to a specific migration:
+update-database -migration AddedXYZ -Context MyContext
