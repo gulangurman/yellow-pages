@@ -31,7 +31,7 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
-        public async Task<IActionResult> Listing(int category, string city)
+        public async Task<IActionResult> Listing(string keyword, int category, string city)
         {
             ListingViewModel model = new ListingViewModel();
             model.CategoryStats = await _context.Post
@@ -65,6 +65,10 @@ namespace ShortListMVC.Controllers
             if (!string.IsNullOrWhiteSpace(city))
             {
                 posts = posts.Where(p => p.CityId.Equals(city));
+            }
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                posts = posts.Where(p => p.Title.ToLower().Contains(keyword.Trim().ToLower()));
             }
             model.Posts = await posts.ToListAsync();
             return View(model);
