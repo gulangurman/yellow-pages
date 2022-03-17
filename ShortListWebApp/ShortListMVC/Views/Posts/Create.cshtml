@@ -84,7 +84,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group mb-0">
                                                             <label asp-for="Tags" class="tag-label">Etiketler</label>
-                                                            <input asp-for="Tags" class="form-control" placeholder="Etiket giriniz" />
+                                                            <input asp-for="Tags" class="form-control" data-role="tagsinput"/>
                                                             <span asp-validation-for="Tags" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -202,4 +202,43 @@
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+ <script>
+    $(function () {
+      $('input')
+        .on('change', function (event) {
+          var $element = $(event.target);
+          var $container = $element.closest('.example');
+
+          if (!$element.data('tagsinput')) return;
+
+          var val = $element.val();
+          if (val === null) val = 'null';
+          var items = $element.tagsinput('items');
+          // console.log(items[items.length - 1]);
+
+          $('code', $('pre.val', $container)).html(
+            $.isArray(val)
+              ? JSON.stringify(val)
+              : '"' + val.replace('"', '\\"') + '"'
+          );
+          $('code', $('pre.items', $container)).html(
+            JSON.stringify($element.tagsinput('items'))
+          );
+           //console.log(val);
+    //console.log(items);
+    //console.log(JSON.stringify(val));
+    //console.log(JSON.stringify(items));
+
+    //console.log(items[items.length - 1]);
+    $("#Tags").val(val);
+        })
+        .trigger('change');
+
+        $('input').on('itemAdded', function(event) {
+  // event.item: contains the item
+  //console.log("added");
+  
+});
+    });
+  </script>
 }

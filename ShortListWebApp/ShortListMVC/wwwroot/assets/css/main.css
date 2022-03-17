@@ -8689,3 +8689,24 @@ blockquote {
     background: #081828;
     opacity: .9;
 }
+
+.bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: white !important;
+    background-color: #0d6efd;
+    padding: 0.2rem;
+}
+
+.bootstrap-tagsinput input {
+   height:inherit;
+   width:inherit;
+   border:inherit;
+}
+
+.items-grid .single-grid .content .bottom-content .price span a{
+    color: #5830e0;
+    font-weight: 700;
+    font-size: 18px;
+    display: inline-block;
+    margin-left: 5px
+}

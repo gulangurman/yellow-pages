@@ -25,8 +25,8 @@
                                     <img src="assets/images/item-details/image5.jpg" class="img" alt="#">
                                 </div>
                                 -->
-                                
-                            </main>
+
+                        </main>
                         </div>
                     </div>
 
@@ -85,12 +85,19 @@
                         <h3>Açıklama</h3>
                         <p>@Model.Content</p>
                     </div>
-                    <div class="single-block tags">
-                        <h3>Etiketler</h3>
-                        <ul>
-                            <li><a href="javascript:void(0)">@Model.Tags</a></li>
-                        </ul>
-                    </div>
+                    @if (!string.IsNullOrWhiteSpace(Model.Tags))
+                    {
+                        <div class="single-block tags">
+                            <h3>Etiketler</h3>
+                            <ul>
+                                @foreach (var tag in Model.Tags.Split(","))
+                                {
+                                    <li><a asp-controller="Posts" asp-action="Lısting" asp-route-tag="@tag">@tag</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
                     <!--
                         <div class="single-block comments">
                         <h3>Comments</h3>
