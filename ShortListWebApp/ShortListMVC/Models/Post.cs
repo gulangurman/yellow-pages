@@ -13,6 +13,9 @@ namespace ShortListMVC.Models
         public string AccountId { get; set; }
         public string ImageUrl { get; set; }
         public string Tags { get; set; }
+
+        public string? ContactPhone { get; set; }
+        public string? ContactEmail { get; set; }
         
         public DateTime CreatedDate { get; set; }
         public DateTime CreatedTime { get; set; }
