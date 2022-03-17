@@ -52,7 +52,7 @@
                                 @foreach (var item in Model.CityStats)
                                 {
                                     <li>
-                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.City.Id">@item.City.Name<span>@item.CityPosts</span></a>
+                                        <a asp-controller="Posts" asp-action="Listing" asp-route-city="@item.City.Id">@item.City.Name<span>@item.CityPosts</span></a>
                                     </li>
                                 }
                             </ul>
