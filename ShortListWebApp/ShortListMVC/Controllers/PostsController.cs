@@ -31,7 +31,7 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
-        public async Task<IActionResult> Listing(string keyword, int category, string city, string tag)
+        public async Task<IActionResult> Listing(string keyword, int category, string city, string tag, int page=1)
         {
             ListingViewModel model = new ListingViewModel();
             model.CategoryStats = await _context.Post
@@ -74,7 +74,8 @@ namespace ShortListMVC.Controllers
             {
                 posts = posts.Where(p => p.Title.ToLower().Contains(keyword.Trim().ToLower()));
             }
-            model.Posts = await posts.ToListAsync();
+            //model.Posts = await posts.ToListAsync();
+            model.Posts = PagedList<Post>.ToPagedList(posts, page, 6);
             return View(model);
         }
 

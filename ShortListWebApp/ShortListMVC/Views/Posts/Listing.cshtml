@@ -1,6 +1,10 @@
 ﻿@model ShortListMVC.Models.ListingViewModel
 @{
     ViewData["Title"] = "İlanlar";
+    var PagedPosts = (PagedList<Post>)Model.Posts;
+    var firstPost = (PagedPosts.CurrentPage - 1) * PagedPosts.PageSize + 1;
+    var lastMaxPost = (PagedPosts.CurrentPage * PagedPosts.PageSize);
+    var lastPost = PagedPosts.TotalCount < lastMaxPost ? PagedPosts.TotalCount : lastMaxPost;
 }
 
 <section class="category-page section" style="margin-top:100px">
@@ -97,7 +101,7 @@
                             <div class="category-grid-topbar">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <h3 class="title">En uygun ilanlar gösteriliyor.</h3>
+                                        <h3 class="title">@PagedPosts.TotalCount ilandan @firstPost - @lastPost arası gösteriliyor.</h3>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <nav>
@@ -113,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                @foreach (var post in Model.Posts)
+                                @foreach (var post in PagedPosts)
                                 {
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="single-item-grid">
@@ -167,11 +171,15 @@
                                 <div class="col-12">
                                     <div class="pagination left">
                                         <ul class="pagination-list">
-                                            <li><a href="javascript:void(0)">1</a></li>
-                                            <li class="active"><a href="javascript:void(0)">2</a></li>
-                                            <li><a href="javascript:void(0)">3</a></li>
-                                            <li><a href="javascript:void(0)">4</a></li>
-                                            <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
+                                            @if (PagedPosts.HasPrevious)
+                                            {
+                                                <li><a asp-controller="Posts" asp-action="Listing" asp-route-page="@(PagedPosts.CurrentPage-1)"><i class="lni lni-chevron-left"></i></a></li>
+                                            }
+                                            <li class="active"><a href="javascript:void(0)">@PagedPosts.CurrentPage</a></li>                                            
+                                            @if (PagedPosts.HasNext)
+                                            {
+                                                <li><a asp-controller="Posts" asp-action="Listing" asp-route-page="@(PagedPosts.CurrentPage+1)"><i class="lni lni-chevron-right"></i></a></li>
+                                            }
                                         </ul>
                                     </div>
                                 </div>
