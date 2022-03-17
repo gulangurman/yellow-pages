@@ -31,11 +31,12 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post.ToListAsync());
         }
 
-        public async Task<IActionResult> Listing(int category)
+        public async Task<IActionResult> Listing(int category, string city)
         {
             ListingViewModel model = new ListingViewModel();
             model.CategoryStats = await _context.Post
                 .Include(c => c.Category)
+                .Where(p => p.CategoryId != null)
                 .GroupBy(p => p.CategoryId)
                 .Select(x => new CategoryStatsViewModel()
                 {
@@ -43,28 +44,29 @@ namespace ShortListMVC.Controllers
                     CategoryPosts = x.Count()
                 }).ToListAsync();
 
+            model.CityStats = await _context.Post
+                .Include(c => c.City)
+                .Where(p => p.CityId != null)
+                .GroupBy(p => p.CityId)
+                .Select(x => new CityStatsViewModel()
+                {
+                    City = x.FirstOrDefault().City,
+                    CityPosts = x.Count()
+                }).ToListAsync();
+
+            var posts = _context.Post
+                .Include(p => p.City)
+                .Include(p => p.Category)
+                .AsQueryable();
             if (category > 0)
             {
-                model.Posts = await _context.Post.Where(p => p.CategoryId == category).ToListAsync();
+                posts = posts.Where(p => p.CategoryId == category);
             }
-            else
+            if (!string.IsNullOrWhiteSpace(city))
             {
-                model.Posts = await _context.Post.ToListAsync();
+                posts = posts.Where(p => p.CityId.Equals(city));
             }
-
-            /*
-             if (string.IsNullOrWhiteSpace(category))
-            {
-                model.Posts = await _context.Post.ToListAsync();
-            }
-            else
-            {
-                model.Posts = await _context.Post.Include(p => p.Category)
-                    .Where(p => p.Category.Slug.ToLower().Equals(category.ToLower()))
-                    .ToListAsync();
-            }
-             */
-
+            model.Posts = await posts.ToListAsync();
             return View(model);
         }
 
@@ -88,7 +90,7 @@ namespace ShortListMVC.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post
+            var post = await _context.Post.Include(p => p.City)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
@@ -109,6 +111,12 @@ namespace ShortListMVC.Controllers
                          Value = cat.Id.ToString(),
                          Text = cat.Name
                      }).ToListAsync();
+            ViewBag.Cities = await _context.City
+                     .Select(city => new SelectListItem
+                     {
+                         Value = city.Id,
+                         Text = city.Name
+                     }).ToListAsync();
             /*
              ViewBag.Categories.Insert(0, new SelectListItem()
             {
@@ -125,7 +133,7 @@ namespace ShortListMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Title,Content,ImageUrl,Tags,CategoryId")] CreatePostViewModel vm)
+        public async Task<IActionResult> Create([Bind("Title,Content,ImageUrl,Tags,CategoryId,CityId")] CreatePostViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +143,8 @@ namespace ShortListMVC.Controllers
                     Content = vm.Content,
                     CategoryId = vm.CategoryId,
                     Tags = vm.Tags,
-                    ImageUrl = vm.ImageUrl
+                    ImageUrl = vm.ImageUrl,
+                    CityId = vm.CityId
                 };
                 var userid = _userManager.GetUserId(User);
                 post.AccountId = userid;

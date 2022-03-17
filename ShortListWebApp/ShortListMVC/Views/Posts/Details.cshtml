@@ -35,7 +35,7 @@
                 <div class="@(!string.IsNullOrWhiteSpace(Model.ImageUrl) ? "col-lg-6":"") col-md-12 col-12">
                     <div class="product-info">
                         <h2 class="title">@Model.Title</h2>
-                        <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">Şehir</a></p>
+                        <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">@Model.City?.Name</a></p>
                         <div class="list-info">
                             <h4>İlan hakkında</h4>
                             <ul>

@@ -1,8 +1,7 @@
 ﻿@model ShortListMVC.Models.Post
 
 @{
-    ViewData["Title"] = "Create";
-    //var Categories = (IList<Category>)ViewBag.Categories;
+    ViewData["Title"] = "Yeni İlan Oluştur";
 }
 
 <section class="dashboard section" style="margin-top:100px">
@@ -59,7 +58,7 @@
                                                             <div class="selector-head">
                                                                 <span class="arrow"><i class="lni lni-chevron-down"></i></span>
                                                                 <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="user-chosen-select">
-                                                                    <option value="none" selected disabled>Kategori seçiniz</option>                                                                   
+                                                                    <option value="none" selected disabled>Kategori seçiniz</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -69,11 +68,8 @@
                                                             <label>Şehir</label>
                                                             <div class="selector-head">
                                                                 <span class="arrow"><i class="lni lni-chevron-down"></i></span>
-                                                                <select class="user-chosen-select">
-                                                                    <option value="none">Şehir seçiniz</option>
-                                                                    <option value="none">İstanbul</option>
-                                                                    <option value="none">Ankara</option>
-                                                                    <option value="none">İzmir</option>
+                                                                <select asp-for="CityId" asp-items="@ViewBag.Cities" class="user-chosen-select">
+                                                                    <option value="none selected disabled">Şehir seçiniz</option>
                                                                 </select>
                                                             </div>
                                                         </div>

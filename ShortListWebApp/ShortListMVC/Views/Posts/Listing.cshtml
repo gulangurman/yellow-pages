@@ -11,12 +11,11 @@
 
                     <div class="single-widget search">
                         <h3>İlanlarda ara</h3>
-                        <form action="#">
+                        <form asp-controller="Posts" asp-action="Listing" method="get">
                             <input type="text" placeholder="Ara...">
                             <button type="submit"><i class="lni lni-search-alt"></i></button>
                         </form>
                     </div>
-
 
                     <div class="single-widget">
                         <h3>Kategoriler</h3>
@@ -35,6 +34,25 @@
                                 }
                             </ul>
                         }
+                    </div>
+
+                    <div class="single-widget">
+                        <h3>Şehirler</h3>
+                        @if (Model.CityStats.Count() == 0)
+                        {
+                            <p>Şehir yok.</p>
+                        }
+                        else
+                        {
+                            <ul class="list">
+                                @foreach (var item in Model.CityStats)
+                                {
+                                    <li>
+                                        <a asp-controller="Posts" asp-action="Listing" asp-route-category="@item.City.Id">@item.City.Name<span>@item.CityPosts</span></a>
+                                    </li>
+                                }
+                            </ul>
+                        }
 
                     </div>
 
@@ -48,32 +66,18 @@
                         </div>
                     </div>
 
-                    -->
-                    <!--
-                         <div class="single-widget condition">
-                        <h3>Condition</h3>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                            <label class="form-check-label" for="flexCheckDefault1">
-                                All
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                            <label class="form-check-label" for="flexCheckDefault2">
-                                New
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                            <label class="form-check-label" for="flexCheckDefault3">
-                                Used
-                            </label>
-                        </div>
+                    <div class="single-widget condition">
+                        <h3>Şehirler</h3>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id=@@("flexCheckDefault"+stat.City.Id)>
+                                    <label class="form-check-label" for=@@("flexCheckDefault"+stat.City.Id)>
+                    @@stat.City.Name <span class="ms-2 text-secondary" style="">(@@stat.CityPosts.ToString())</span>
+                                    </label>
+                                </div>
+
                     </div>
 
-                    -->
-                    <!--
                          <div class="single-widget banner">
                         <h3>Advertisement</h3>
                         <a href="javascript:void(0)">
@@ -127,12 +131,15 @@
                                                 <h3 class="title">
                                                     <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                                 </h3>
-                                                <p class="location">
-                                                    <a href="javascript:void(0)">
-                                                        <i class="lni lni-map-marker">
-                                                        </i>Şehir
-                                                    </a>
-                                                </p>
+                                                @if (post.City != null)
+                                                {
+                                                    <p class="location">
+                                                        <a href="javascript:void(0)">
+                                                            <i class="lni lni-map-marker">
+                                                            </i>@post.City?.Name
+                                                        </a>
+                                                    </p>
+                                                }
                                                 <ul class="info">
                                                     <li class="like">
                                                         <a href="javascript:void(0)"><i class="lni lni-heart"></i></a>

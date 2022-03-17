@@ -20,51 +20,52 @@
 
                     <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                         <form asp-controller="Posts" asp-action="Listing" method="get">
-                             <div class="row">
+                            <div class="row">
 
-                            <div class="col-lg-4 col-md-4 col-12 p-0">
-                                <div class="search-input">
-                                    <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                    <input type="text" name="keyword" id="keyword" placeholder="Anahtar kelime">
+                                <div class="col-lg-4 col-md-4 col-12 p-0">
+                                    <div class="search-input">
+                                        <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
+                                        <input type="text" name="keyword" id="keyword" placeholder="Anahtar kelime">
+                                    </div>
                                 </div>
-                            </div>
-                            @if (Model.Categories != null)
-                            {
+                                @if (Model.Categories != null)
+                                {
+                                    <div class="col-lg-3 col-md-3 col-12 p-0">
+                                        <div class="search-input">
+                                            <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
+                                            <select name="category" id="category">
+                                                <option value="none" selected disabled>Kategoriler</option>
+                                                @foreach (var cat in Model.Categories)
+                                                {
+                                                    <option value="@cat.Id">@cat.Name</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                }
+
                                 <div class="col-lg-3 col-md-3 col-12 p-0">
                                     <div class="search-input">
-                                        <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
-                                        <select name="category" id="category">
-                                            <option value="none" selected disabled>Kategoriler</option>
-                                            @foreach (var cat in Model.Categories)
-                                            {
-                                                <option value="@cat.Id">@cat.Name</option>
-                                            }
-
+                                        <label for="location"><i class="lni lni-map-marker theme-color"></i></label>
+                                        <select name="city" id="city">
+                                            <option value="none" selected disabled>Şehir</option>
+                                             @foreach (var city in Model.Cities)
+                                                {
+                                                    <option value="@city.Id">@city.Name</option>
+                                                }                                           
                                         </select>
                                     </div>
                                 </div>
-                            }
-
-                            <div class="col-lg-3 col-md-3 col-12 p-0">
-                                <div class="search-input">
-                                    <label for="location"><i class="lni lni-map-marker theme-color"></i></label>
-                                    <select name="location" id="location">
-                                        <option value="none" selected disabled>Şehir</option>
-                                        <option value="34">İstanbul</option>
-                                        <option value="06">Ankara</option>
-                                        <option value="35">İzmir</option>
-                                    </select>
+                                <div class="col-lg-2 col-md-2 col-12 p-0">
+                                    <div class="search-btn button">
+                                        <input type="submit" class="btn" value="İlanlarda Ara"/>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-12 p-0">
-                                <div class="search-btn button">
-                                    <input type="submit" class="btn" value="İlanlarda Ara"/>
-                                </div>
-                            </div>
-                        </div>
 
                         </form>
-                       
+
 
                     </div>
 
@@ -126,14 +127,15 @@
                                         <div class="author-image">
                                             <a href="javascript:void(0)">
                                                 <!--
-                                                <img src="assets/images/items-grid/author-1.jpg" alt="#"/>                                                                                              -->
+                                                <img src="assets/images/items-grid/author-1.jpg" alt="#"/>
+                                                -->
                                         <span>İlan Sahibi</span>
                                             </a>
                                         </div>
                                         <!--
                                             <p class="sale">Yeni</p>
-                                        -->                                        
-                                    </div>
+                                        -->
+                            </div>
                                 </div>
                             }
 
@@ -153,7 +155,10 @@
                                         <li><a href="javascript:void(0)">(0)</a></li>
                                     </ul>
                                     <ul class="info-list">
-                                        <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> İstanbul</a></li>
+                                        @if (post.City != null)
+                                        {
+                                            <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> @post.City.Name</a></li>
+                                        }
                                         <li><a href="javascript:void(0)"><i class="lni lni-timer"></i> 29 Ekim 2023</a></li>
                                     </ul>
                                 </div>
@@ -194,7 +199,7 @@
     </div>
 </section>
 
-<!--  
+<!--
 
 <div class="row" data-masonry='{"percentPosition": true }'>
     @@foreach (var post in Model)
