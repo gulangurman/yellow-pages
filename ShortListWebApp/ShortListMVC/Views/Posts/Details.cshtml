@@ -45,18 +45,31 @@
                         </div>
                         <div class="contact-info">
                             <ul>
-                                <li>
-                                    <a href="tel:+905051234567" class="call">
-                                        <i class="lni lni-phone-set"></i>
-                                        +90 505 123 4567
-                                        <span>İlan sahibini ara</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:example@gmail.com" class="mail">
-                                        <i class="lni lni-envelope"></i>
-                                    </a>
-                                </li>
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactPhone))
+                                {
+                                    <li>
+                                        <a href=@("tel:+90" + Model.ContactPhone) class="call">
+                                            <i class="lni lni-phone-set"></i>
+                                            @string.Format("({0}) {1} {2} {3}",Model.ContactPhone.Substring(0,3)
+                                        ,Model.ContactPhone.Substring(3,3)
+                                        ,Model.ContactPhone.Substring(6,2)
+                                        ,Model.ContactPhone.Substring(8,2)
+                                        )
+                                            <span>İlan sahibini ara</span>
+                                        </a>
+                                    </li>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(Model.ContactEmail))
+                                {
+                                    <li>
+                                        <a href=@("mailto:" + Model.ContactEmail) class="call">
+                                            <i class="lni lni-envelope"></i>
+                                            @Model.ContactEmail
+                                            <span>E-posta gönder</span>
+                                        </a>
+                                    </li>
+                                }
+
                             </ul>
                         </div>
                         <!--
