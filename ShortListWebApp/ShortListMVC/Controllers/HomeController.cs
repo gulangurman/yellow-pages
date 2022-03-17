@@ -21,7 +21,11 @@ namespace ShortListMVC.Controllers
         {
             HomeViewModel model = new HomeViewModel();
             model.Categories = await _postContext.Category.ToListAsync();
-            model.Posts = await _postContext.Post.Take(6).Include(p => p.City).ToListAsync();
+            model.Posts = await _postContext.Post
+                .OrderByDescending(p=>p.CreatedTime)
+                .Take(6)
+                .Include(p => p.City)
+                .ToListAsync();
             model.Cities = await _postContext.City.ToListAsync();
 
             model.CategoryStats = await _postContext.Post

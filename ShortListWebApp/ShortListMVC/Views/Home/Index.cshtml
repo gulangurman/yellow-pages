@@ -50,16 +50,16 @@
                                         <label for="location"><i class="lni lni-map-marker theme-color"></i></label>
                                         <select name="city" id="city">
                                             <option value="none" selected disabled>Şehir</option>
-                                             @foreach (var city in Model.Cities)
-                                                {
-                                                    <option value="@city.Id">@city.Name</option>
-                                                }                                           
+                                            @foreach (var city in Model.Cities)
+                                            {
+                                                <option value="@city.Id">@city.Name</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
                                     <div class="search-btn button">
-                                        <input type="submit" class="btn" value="İlanlarda Ara"/>
+                                        <input type="submit" class="btn" value="İlanlarda Ara" />
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,8 @@
                                     <h3 class="title">
                                         <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                     </h3>
-                                    <p class="update-time">Son güncelleme: 1 saat önce</p>
+                                    <!--
+                                         <p class="update-time">Son güncelleme: 1 saat önce</p>
                                     <ul class="rating">
                                         <li><i class="lni lni-star-filled"></i></li>
                                         <li><i class="lni lni-star-filled"></i></li>
@@ -154,12 +155,15 @@
                                         <li><i class="lni lni-star-filled"></i></li>
                                         <li><a href="javascript:void(0)">(0)</a></li>
                                     </ul>
-                                    <ul class="info-list">
+
+                                    -->
+
+                                <ul class="info-list">
                                         @if (post.City != null)
                                         {
                                             <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> @post.City.Name</a></li>
                                         }
-                                        <li><a href="javascript:void(0)"><i class="lni lni-timer"></i> 29 Ekim 2023</a></li>
+                                        <li><a href="javascript:void(0)"><i class="lni lni-timer"></i> @post.CreatedDate.ToShortDateString()</a></li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">

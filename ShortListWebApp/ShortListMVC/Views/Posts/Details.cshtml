@@ -39,8 +39,8 @@
                         <div class="list-info">
                             <h4>İlan hakkında</h4>
                             <ul>
-                                <li><span>Kategori:</span> Kategori</li>
-                                <li><span>İlan tarihi:</span> İlan tarihi</li>
+                                <li><span>Kategori:</span> @(Model.Category?.Name ?? "Belirtilmemiş")</li>
+                                <li><span>İlan tarihi:</span> @Model.CreatedDate.ToShortDateString()</li>
                             </ul>
                         </div>
                         <div class="contact-info">
@@ -88,7 +88,7 @@
                     <div class="single-block tags">
                         <h3>Etiketler</h3>
                         <ul>
-                            <li><a href="javascript:void(0)">İlan</a></li>
+                            <li><a href="javascript:void(0)">@Model.Tags</a></li>
                         </ul>
                     </div>
                     <!--

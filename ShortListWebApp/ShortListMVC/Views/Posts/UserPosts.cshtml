@@ -46,7 +46,7 @@
                                             <p>Kategori</p>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-12">
-                                            <p>Durum</p>
+                                            <p>Tarih</p>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-12 align-right">
                                             <p>İşlemler</p>
@@ -71,7 +71,7 @@
                                                 <p>@post.Category.Name</p>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-12">
-                                                <p>Aktif</p>
+                                                <p>@post.CreatedDate.ToShortDateString()</p>
                                             </div>
                                             <div class="col-lg-3 col-md-3 col-12 align-right">
                                                 <ul class="action-btn">

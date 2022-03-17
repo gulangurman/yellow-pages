@@ -79,6 +79,7 @@ namespace ShortListMVC.Controllers
             return View(await _context.Post
                 .Where(post => post.AccountId.Equals(id))
                 .Include(x => x.Category)
+                .OrderByDescending(p => p.CreatedDate)
                 .ToListAsync());
         }
 
@@ -117,13 +118,7 @@ namespace ShortListMVC.Controllers
                          Value = city.Id,
                          Text = city.Name
                      }).ToListAsync();
-            /*
-             ViewBag.Categories.Insert(0, new SelectListItem()
-            {
-                Text = "----Kategori----",
-                Value = string.Empty
-            });
-             */
+
             return View();
         }
 
@@ -148,6 +143,8 @@ namespace ShortListMVC.Controllers
                 };
                 var userid = _userManager.GetUserId(User);
                 post.AccountId = userid;
+                post.CreatedDate = DateTime.Now.Date;
+                post.CreatedTime = DateTime.Now;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), "Home");
