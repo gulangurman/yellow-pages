@@ -137,7 +137,7 @@ namespace ShortListMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Title,Content,ImageUrl,Tags,CategoryId,CityId")] CreatePostViewModel vm)
+        public async Task<IActionResult> Create([Bind("Title,Content,ImageUrl,Tags,CategoryId,CityId,ContactPhone,ContactEmail")] CreatePostViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -148,7 +148,9 @@ namespace ShortListMVC.Controllers
                     CategoryId = vm.CategoryId,
                     Tags = vm.Tags,
                     ImageUrl = vm.ImageUrl,
-                    CityId = vm.CityId
+                    CityId = vm.CityId,
+                    ContactPhone=vm.ContactPhone,
+                    ContactEmail=vm.ContactEmail
                 };
                 var userid = _userManager.GetUserId(User);
                 post.AccountId = userid;

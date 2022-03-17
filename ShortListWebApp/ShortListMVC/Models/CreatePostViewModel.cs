@@ -8,5 +8,7 @@
         public string? Tags { get; set; }
         public int? CategoryId { get; set; }
         public string? CityId { get; set; }
+        public string? ContactPhone { get; set; }
+        public string? ContactEmail { get; set; }
     }
 }
