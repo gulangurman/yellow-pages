@@ -63,7 +63,7 @@ namespace ShortListMVC.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserPosts","Posts");
             }
             return View(category);
         }
@@ -114,7 +114,7 @@ namespace ShortListMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserPosts","Posts");
             }
             return View(category);
         }
@@ -145,7 +145,7 @@ namespace ShortListMVC.Controllers
             var category = await _context.Category.FindAsync(id);
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserPosts","Posts");
         }
 
         private bool CategoryExists(int id)
