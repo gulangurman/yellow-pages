@@ -19,7 +19,7 @@ namespace ShortListMVC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            string TEST_USER_ID = "02174cf0–9412–4cfe - afbf - 59f706d72cf6";
+            string TEST_USER_ID = "02174cf0–9412–4cfe-afbf-59f706d72cf6";
 
             modelBuilder.Entity<Category>().HasData(
           new Category { Id = 1, Name = "Kayıp", Slug = "lost", Icon = "dinner" }
