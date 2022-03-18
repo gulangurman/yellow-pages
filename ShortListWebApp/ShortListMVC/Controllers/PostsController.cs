@@ -17,9 +17,9 @@ namespace ShortListMVC.Controllers
     public class PostsController : Controller
     {
         private readonly PostContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostsController(PostContext context, UserManager<IdentityUser> userManager)
+        public PostsController(PostContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -28,10 +28,10 @@ namespace ShortListMVC.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Post.ToListAsync());
+            return View(await _context.Post.Include(c => c.Category).ToListAsync());
         }
 
-        public async Task<IActionResult> Listing(string keyword, int category, string city, string tag, int page=1)
+        public async Task<IActionResult> Listing(string keyword, int category, string city, string tag, int page = 1)
         {
             ListingViewModel model = new ListingViewModel();
             model.CategoryStats = await _context.Post
@@ -106,6 +106,7 @@ namespace ShortListMVC.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Author = await _userManager.FindByIdAsync(post.AccountId);
 
             return View(post);
         }
@@ -149,8 +150,8 @@ namespace ShortListMVC.Controllers
                     Tags = vm.Tags,
                     ImageUrl = vm.ImageUrl,
                     CityId = vm.CityId,
-                    ContactPhone=vm.ContactPhone,
-                    ContactEmail=vm.ContactEmail
+                    ContactPhone = vm.ContactPhone,
+                    ContactEmail = vm.ContactEmail
                 };
                 var userid = _userManager.GetUserId(User);
                 post.AccountId = userid;
@@ -158,7 +159,7 @@ namespace ShortListMVC.Controllers
                 post.CreatedTime = DateTime.Now;
                 _context.Add(post);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(vm);
         }
@@ -176,7 +177,32 @@ namespace ShortListMVC.Controllers
             {
                 return NotFound();
             }
-            return View(post);
+            EditPostViewModel vm = new EditPostViewModel
+            {
+                Title = post.Title,
+                Content = post.Content,
+                CategoryId = post.CategoryId,
+                Tags = post.Tags,
+                ImageUrl = post.ImageUrl,
+                CityId = post.CityId,
+                ContactPhone = post.ContactPhone,
+                ContactEmail = post.ContactEmail,
+                AccountId = post.AccountId
+            };
+
+            ViewBag.Categories = await _context.Category
+                     .Select(cat => new SelectListItem
+                     {
+                         Value = cat.Id.ToString(),
+                         Text = cat.Name
+                     }).ToListAsync();
+            ViewBag.Cities = await _context.City
+                     .Select(city => new SelectListItem
+                     {
+                         Value = city.Id,
+                         Text = city.Name
+                     }).ToListAsync();
+            return View(vm);
         }
 
         // POST: Posts/Edit/5
@@ -184,15 +210,29 @@ namespace ShortListMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,AccountId,ImageUrl,Tags")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,AccountId,ImageUrl,Tags,ContactPhone,ContactEmail,CategoryId,CityId")] EditPostViewModel vm)
         {
-            if (id != post.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                Post post = new Post
+                {
+                    Id = id,
+                    Title = vm.Title,
+                    Content = vm.Content,
+                    CategoryId = vm.CategoryId,
+                    Tags = vm.Tags,
+                    ImageUrl = vm.ImageUrl,
+                    CityId = vm.CityId,
+                    ContactPhone = vm.ContactPhone,
+                    ContactEmail = vm.ContactEmail
+                };
+                var userid = _userManager.GetUserId(User);
+                post.AccountId = userid;
                 try
                 {
                     _context.Update(post);
@@ -209,9 +249,9 @@ namespace ShortListMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("UserPosts");
             }
-            return View(post);
+            return View(vm);
         }
 
         // GET: Posts/Delete/5
@@ -240,7 +280,7 @@ namespace ShortListMVC.Controllers
             var post = await _context.Post.FindAsync(id);
             _context.Post.Remove(post);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserPosts","Posts");
         }
 
         private bool PostExists(int id)

@@ -1,54 +1,145 @@
-﻿@model ShortListMVC.Models.Post
+﻿@model ShortListMVC.Models.EditPostViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "İlanı düzenle";
 }
 
-<h1>Edit</h1>
+<section class="dashboard section" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <partial name="_UserNavPartial" />
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">İlanı düzenle</h3>
+                        <div class="inner-block">
+                            <div class="post-ad-tab">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade active show" id="nav-item-info" role="tabpanel" aria-labelledby="nav-item-info-tab">
+                                        <div class="step-one-content">
+                                            <form asp-action="Edit" class="default-form-style" method="post">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <input type="hidden" asp-for="Id" />
+                                                        <div class="form-group  mb-0">
+                                                            <label asp-for="Title" class="control-label">Başlık*</label>
+                                                            <input asp-for="Title" class="form-control" />
+                                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="form-group mb-0">
 
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                                                            <label>Kategori</label>
+                                                            <div class="selector-head">
+                                                                <span class="arrow"><i class="lni lni-chevron-down"></i></span>
+                                                                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="user-chosen-select">
+                                                                    <option value="none" selected disabled>Kategori seçiniz</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label>Şehir</label>
+                                                            <div class="selector-head">
+                                                                <span class="arrow"><i class="lni lni-chevron-down"></i></span>
+                                                                <select asp-for="CityId" asp-items="@ViewBag.Cities" class="user-chosen-select">
+                                                                    <option value="none" selected disabled>Şehir seçiniz</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0 mt-3">
+                                                            <label asp-for="Content" class="control-label">Açıklama*</label> <input asp-for="Content" class="form-control" />
+                                                            <span asp-validation-for="Content" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="Tags" class="control-label">Etiketler</label>
+                                                            <input asp-for="Tags" class="form-control" />
+                                                            <span asp-validation-for="Tags" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="ImageUrl" class="control-label">Resim</label>
+                                                            <input asp-for="ImageUrl" class="form-control" />
+                                                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group mb-0">
+                                                            <label asp-for="ContactPhone" class="control-label">İletişim telefon numarası</label>
+                                                            <input asp-for="ContactPhone" class="form-control" />
+                                                            <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-0">
+                                                        <label asp-for="ContactEmail" class="control-label">İletişim E-posta adresi</label>
+                                                        <input asp-for="ContactEmail" class="form-control" />
+                                                        <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                                    </div>
+
+                                                    <div class="col-12" style="display:none">
+                                                        <label asp-for="AccountId" class="control-label"></label>
+                                                        <input asp-for="AccountId" class="form-control" />
+                                                        <span asp-validation-for="AccountId" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group button mb-0">
+                                                            <button type="submit" value="Kaydet" class="btn">Güncelle</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" class="form-control" />
-                <span asp-validation-for="Tags" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountId" class="control-label"></label>
-                <input asp-for="AccountId" class="form-control" />
-                <span asp-validation-for="AccountId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    </div>
+    </div>
+</section>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<section class="call-action overlay section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 offset-lg-2 col-12">
+                <div class="inner">
+                    <div class="content">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">
+                            Siz de ilanınızı Sarı Sayfalar'da verin<br>
+                            zamandan tasarruf edin
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Sarı sayfalar ile siz de zaman kazanın<br> Sarı Sayfalar'da ilan vermek çok kolay!</p>
+                        <div class="button wow fadeInUp" data-wow-delay=".8s">
+                            <a asp-controller="Posts" asp-action="Create" class="btn">Hemen ilan ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

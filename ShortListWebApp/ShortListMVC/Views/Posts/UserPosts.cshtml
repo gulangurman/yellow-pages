@@ -8,23 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
-                <div class="dashboard-sidebar">
-                    <div class="dashboard-menu">
-                        <ul>
-                            <li><a class="active" asp-controller="Posts" asp-action="UserPosts"><i class="lni lni-bolt-alt"></i>İlanlarım</a></li>
-                            <li>
-                                <a asp-controller="Posts" asp-action="Create">
-                                    <i class="lni lni-circle-plus"></i> İlan ver
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="button">
-                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button class="btn" type="submit">Çıkış yap</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <partial name="_UserNavPartial" />
             </div>
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="main-content">
