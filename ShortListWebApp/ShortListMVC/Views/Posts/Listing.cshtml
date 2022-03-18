@@ -121,26 +121,26 @@
                                 {
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="single-item-grid">
-                                            @if (!string.IsNullOrWhiteSpace(post.ImageUrl))
-                                            {
-                                                <div class="image">
-                                                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
-                                                        <img src="@post.ImageUrl" alt="#" />
-                                                    </a>
-                                                    <!--
-                                                        <i class=" cross-badge lni lni-bolt"></i>
-                                                    <span class="flat-badge sale">Yeni</span>
-                                                    -->
-                                        </div>
-                                            }
-                                            <div class="content">
-                                                @if (!string.IsNullOrWhiteSpace(post.Tags))
-                                                {
-                                                    @foreach (var tag in post.Tags.Split(","))
+
+                                            <div class="image">
+                                                <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">
+                                                    @if (!string.IsNullOrWhiteSpace(post.ImageUrl))
                                                     {
-                                                        <a asp-controller="Posts" asp-action="Listing" asp-route-tag="@tag" class="tag">@tag</a>
+                                                         <img src="@post.ImageUrl" alt="#" />
                                                     }
-                                                }
+                                                    else
+                                                    {
+                                                          <img src="~/assets/images/no-image.png" alt="#" />
+                                                    }
+                                                   
+                                                </a>
+                                                <!--
+                                                    <i class=" cross-badge lni lni-bolt"></i>
+                                                <span class="flat-badge sale">Yeni</span>
+                                                -->
+                                        </div>
+
+                                            <div class="content">
                                                 <h3 class="title">
                                                     <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                                 </h3>
@@ -157,11 +157,15 @@
                                                     <a href="javascript:void(0)"><i class="lni lni-timer"></i> @post.CreatedDate.ToShortDateString()</a>
                                                 </p>
 
-                                                <ul class="info">
-                                                    <li class="like">
-                                                        <a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                                    </li>
-                                                </ul>
+                                                <div class="info">
+                                                    @if (!string.IsNullOrWhiteSpace(post.Tags))
+                                                    {
+                                                        @foreach (var tag in post.Tags.Split(","))
+                                                        {
+                                                            <a asp-controller="Posts" asp-action="Listing" asp-route-tag="@tag" class="badge text-secondary">#@tag</a>
+                                                        }
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +179,7 @@
                                             {
                                                 <li><a asp-controller="Posts" asp-action="Listing" asp-route-page="@(PagedPosts.CurrentPage-1)"><i class="lni lni-chevron-left"></i></a></li>
                                             }
-                                            <li class="active"><a href="javascript:void(0)">@PagedPosts.CurrentPage</a></li>                                            
+                                            <li class="active"><a href="javascript:void(0)">@PagedPosts.CurrentPage</a></li>
                                             @if (PagedPosts.HasNext)
                                             {
                                                 <li><a asp-controller="Posts" asp-action="Listing" asp-route-page="@(PagedPosts.CurrentPage+1)"><i class="lni lni-chevron-right"></i></a></li>

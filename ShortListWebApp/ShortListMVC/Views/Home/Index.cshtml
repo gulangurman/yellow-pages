@@ -119,29 +119,36 @@
                     <div class="col-lg-4 col-md-6 col-12">
 
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                            @if (!string.IsNullOrEmpty(post.ImageUrl))
-                            {
-                                <div class="image">
-                                    <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id" class="thumbnail"><img src="@post.ImageUrl" alt="#"></a>
-                                    <div class="author">
-                                        <div class="author-image">
-                                            <a href="javascript:void(0)">
-                                                <!--
-                                                <img src="assets/images/items-grid/author-1.jpg" alt="#"/>
-                                                -->
-                                        <span>İlan Sahibi</span>
-                                            </a>
-                                        </div>
-                                        <!--
-                                            <p class="sale">Yeni</p>
-                                        -->
-                            </div>
-                                </div>
-                            }
 
+                            <div class="image">
+                                <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id" class="thumbnail">
+                                    @if (!string.IsNullOrWhiteSpace(post.ImageUrl))
+                                    {
+                                        <img src="@post.ImageUrl" alt="#" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/assets/images/no-image.png" alt="#" />
+                                    }
+
+                                </a>
+                                <div class="author">
+                                    <div class="author-image">
+                                        <a href="javascript:void(0)">
+                                            <!--
+                                            <img src="assets/images/items-grid/author-1.jpg" alt="#"/>
+                                            -->
+                                        <span></span>
+                                        </a>
+                                    </div>
+                                    <!--
+                                        <p class="sale">Yeni</p>
+                                    -->
+                            </div>
+                            </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <a href="javascript:void(0)" class="tag">@post.Category.Name</a>
+                                    <a href="javascript:void(0)" class="tag">@(post.Category?.Name ?? "Diğer")</a>
                                     <h3 class="title">
                                         <a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
                                     </h3>
@@ -155,9 +162,7 @@
                                         <li><i class="lni lni-star-filled"></i></li>
                                         <li><a href="javascript:void(0)">(0)</a></li>
                                     </ul>
-
                                     -->
-
                                 <ul class="info-list">
                                         @if (post.City != null)
                                         {
@@ -167,25 +172,24 @@
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
-                                    @if (!string.IsNullOrWhiteSpace(post.Tags))
-                                    {
-                                        <p class="price">
-                                            Etiketler:
+
+                                    <p class="price">
+                                        @if (!string.IsNullOrWhiteSpace(post.Tags))
+                                        {
                                             @foreach (var tag in post.Tags.Split(","))
                                             {
-                                                <span><a asp-controller="Posts" asp-action="Listing" asp-route-tag="@tag">@tag</a></span>
+                                                <span><a asp-controller="Posts" asp-action="Listing" asp-route-tag="@tag">#@tag</a></span>
                                             }
-                                        </p>
-                                    }
-                                    <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
-                                </div>
+                                        }
+                                    </p>
+                                    <!--
+                                         <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
+                                    -->
+                            </div>
                             </div>
                         </div>
-
                     </div>
                 }
-
-
             </div>
         </div>
     </div>

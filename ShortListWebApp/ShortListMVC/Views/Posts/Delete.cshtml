@@ -1,39 +1,72 @@
 ﻿@model ShortListMVC.Models.Post
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "İlanı sil";
 }
+<section class="dashboard section" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-menu">
+                        <ul>
+                            <li><a class="active" asp-controller="Posts" asp-action="UserPosts"><i class="lni lni-bolt-alt"></i>İlanlarım</a></li>
+                            <li>
+                                <a asp-controller="Posts" asp-action="Create">
+                                    <i class="lni lni-circle-plus"></i> İlan ver
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="button">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button class="btn" type="submit">Çıkış yap</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="main-content">
+                    <div class="dashboard-block mt-0">
+                        <h3 class="block-title">İlan silinecek. Emin misiniz?</h3>
+                        <div class="my-items">                            
+                            <div>
+                                <span style="color: #081828;">Başlık: </span>@Model.Title
+                            </div>
+                            <div>
+                                <span style="color: #081828;">Tarih: </span>@Model.CreatedDate.ToShortDateString()
+                            </div>
 
-<h1>Delete</h1>
+                            <form asp-action="Delete" class="py-3">
+                                <input type="hidden" asp-for="Id" />
+                                <input type="submit" value="Sil" class="btn btn-danger" />
+                            </form>
+                            <a asp-controller="Posts" asp-action="UserPosts">Geri dön</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+<section class="call-action overlay section">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-8 offset-lg-2 col-12">
+                <div class="inner">
+                    <div class="content">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">
+                            Siz de ilanınızı Sarı Sayfalar'da verin<br>
+                            zamandan tasarruf edin
+                        </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Sarı sayfalar ile siz de zaman kazanın<br> Sarı Sayfalar'da ilan vermek çok kolay!</p>
+                        <div class="button wow fadeInUp" data-wow-delay=".8s">
+                            <a asp-controller="Posts" asp-action="Create" class="btn">Hemen ilan ver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

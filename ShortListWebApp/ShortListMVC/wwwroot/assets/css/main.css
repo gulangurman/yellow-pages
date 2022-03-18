@@ -8710,3 +8710,18 @@ blockquote {
     display: inline-block;
     margin-left: 5px
 }
+
+.item-details-sidebar .single-block.author .content {
+   
+    padding-left: 8px;
+}
+
+.info a.badge.text-secondary {
+    font-size: 1em;
+}
+.items-grid .single-grid .content .bottom-content .price {
+    float: inherit;
+    font-size: 14px;
+    position: inherit;
+    font-weight: 400;
+}

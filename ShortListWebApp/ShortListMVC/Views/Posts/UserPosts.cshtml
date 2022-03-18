@@ -58,9 +58,17 @@
                                 {
                                     <div class="single-item-list">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-5 col-md-5 col-12">
+                                            <div class="col-lg-5 col-md-5 col-12">                                                
                                                 <div class="item-image">
-                                                    <img src="@post.ImageUrl" alt="#">
+                                                    @if (!string.IsNullOrWhiteSpace(post.ImageUrl))
+                                                    {
+                                                        <img src="@post.ImageUrl" alt="Post image">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/assets/images/no-image.png" alt="Post image">
+                                                    }
+
                                                     <div class="content">
                                                         <h3 class="title"><a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a></h3>
                                                         <span class="price">@post.Tags</span>
@@ -68,7 +76,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-12">
-                                                <p>@post.Category.Name</p>
+                                                <p>@(post.Category?.Name ?? "Diğer")</p>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-12">
                                                 <p>@post.CreatedDate.ToShortDateString()</p>

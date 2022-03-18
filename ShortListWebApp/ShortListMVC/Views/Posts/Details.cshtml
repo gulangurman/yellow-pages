@@ -2,37 +2,44 @@
 
 @{
     ViewData["Title"] = "Details";
+    var author = (ApplicationUser)ViewBag.Author;
 }
 
 <section class="item-details section" style="margin-top:100px">
     <div class="container">
         <div class="top-area">
             <div class="row">
-                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
-                {
-                    <div class="col-lg-6 col-md-12 col-12">
-                        <div class="product-images">
-                            <main id="gallery">
-                                <div class="main-img">
+
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-images">
+                        <main id="gallery">
+                            <div class="main-img">
+                                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                                {
                                     <img src="@Model.ImageUrl" id="current" alt="#">
-                                </div>
-                                <!--
-                                    <div class="images" style="display:none">
-                                    <img src="assets/images/item-details/image1.jpg" class="img" alt="#">
-                                    <img src="assets/images/item-details/image2.jpg" class="img" alt="#">
-                                    <img src="assets/images/item-details/image3.jpg" class="img" alt="#">
-                                    <img src="assets/images/item-details/image4.jpg" class="img" alt="#">
-                                    <img src="assets/images/item-details/image5.jpg" class="img" alt="#">
-                                </div>
-                                -->
+                                }
+                                else
+                                {
+                                    <img src="~/assets/images/no-image.png" id="current" alt="#">
+                                }
+                            </div>
+                            <!--
+                                <div class="images" style="display:none">
+                                <img src="assets/images/item-details/image1.jpg" class="img" alt="#">
+                                <img src="assets/images/item-details/image2.jpg" class="img" alt="#">
+                                <img src="assets/images/item-details/image3.jpg" class="img" alt="#">
+                                <img src="assets/images/item-details/image4.jpg" class="img" alt="#">
+                                <img src="assets/images/item-details/image5.jpg" class="img" alt="#">
+                            </div>
+                            -->
 
                         </main>
-                        </div>
                     </div>
+                </div>
 
-                }
 
-                <div class="@(!string.IsNullOrWhiteSpace(Model.ImageUrl) ? "col-lg-6":"") col-md-12 col-12">
+
+                <div class="col-lg-6 col-md-12 col-12">
                     <div class="product-info">
                         <h2 class="title">@Model.Title</h2>
                         <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">@Model.City?.Name</a></p>
@@ -112,18 +119,20 @@
                         <h3>Açıklama</h3>
                         <p>@Model.Content</p>
                     </div>
-                    @if (!string.IsNullOrWhiteSpace(Model.Tags))
-                    {
-                        <div class="single-block tags">
-                            <h3>Etiketler</h3>
-                            <ul>
+
+                    <div class="single-block tags">
+                        <h3>Etiketler</h3>
+                        <ul>
+                            @if (!string.IsNullOrWhiteSpace(Model.Tags))
+                            {
                                 @foreach (var tag in Model.Tags.Split(","))
                                 {
                                     <li><a asp-controller="Posts" asp-action="Listing" asp-route-tag="@tag">@tag</a></li>
                                 }
-                            </ul>
-                        </div>
-                    }
+                            }
+                        </ul>
+                    </div>
+
 
                     <!--
                         <div class="single-block comments">
@@ -181,10 +190,14 @@
                         <div class="single-block author">
                             <h3>İlan sahibi</h3>
                             <div class="content">
-                                <img src="assets/images/testimonial/testi3.jpg" alt="#">
-                                <h4>İlan sahibi</h4>
-                                <span>Üyelik tarihi: 19.09.2020</span>
-                                <a href="javascript:void(0)" class="see-all">Bütün ilanları gör</a>
+                                <!--  <img src="assets/images/testimonial/testi3.jpg" alt="#"> -->
+                                <h4>@author.Nickname</h4>
+                                <p>@author.About</p>
+                                <!--
+                                <span>Üyelik tarihi: @@Model.User.Created</span>
+                                                                <a href="javascript:void(0)" class="see-all">Bütün ilanları gör</a>
+                                                                -->
+
                             </div>
                         </div>
 
